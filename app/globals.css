@@ -2,32 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: 0.075rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+#root {
+  height: 100dvh;
+  height: 100svh;
+  overflow-y: hidden;
+}
+
+html {
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+@layer components {
+  .nav-btn {
+    @apply text-[14px] font-[700] border rounded-[5px] px-[20px] py-[10.5px];
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  .form-btn {
+    @apply w-[360px] h-[64px] rounded-[10px] text-[16px] font-[700] flex justify-center items-center;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .form-input {
+    @apply w-[360px] h-[64px] bg-white rounded-[10px] text-[18px] font-[400] px-[20px] py-[20px] outline-none outline-offset-0 border-[3px] border-white focus:border-[3px] focus:border-primary focus:bg-white;
   }
 }
