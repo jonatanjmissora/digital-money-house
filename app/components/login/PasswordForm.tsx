@@ -42,7 +42,8 @@ export const PasswordForm = ({ mailValue, setStep }: PasswordFormTypes) => {
         reset();
         //setLoginError('');
         //TODO guadar token en en cookies
-        router.push('/dashboard');
+        //router.push('/dashboard');
+        alert("USUARIO LOGUEADO")
       } catch (error) {
         if (error instanceof Error) {
           //setLoginError(error.message);
