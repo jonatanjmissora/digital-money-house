@@ -5,58 +5,32 @@ import { PasswordFormData } from '@/app/types/form.types';
 import { passwordSchema } from '@/app/schema/form.schema';
 import authApi from '@/app/services/auth/auth.services';
 import { useRouter } from 'next/navigation';
+import { LoginResponseType, LoginTypes } from '@/app/types/login.types';
+import Spinner from './UI/Spinner';
 
 type PasswordFormTypes = {
   mailValue: string;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  setLoginError: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const PasswordForm = ({ mailValue, setStep }: PasswordFormTypes) => {
+export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordFormTypes) => {
+  
   const router = useRouter()
 
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setFocus,
     control,
-    reset,
-    resetField,
   } = useForm<PasswordFormData>({
     resolver: yupResolver(passwordSchema),
   });
+
   useEffect(() => {
     setFocus('password');
   }, [setFocus]);
-
-  const onSubmit = async (data: PasswordFormData) => {
-    const loginUserData = { email: mailValue, password: data.password };
-    alert(JSON.stringify(loginUserData, null, 2));
-
-    if (loginUserData.email !== "" && loginUserData.password !== "") {
-
-      try {
-        //setIsLoading(true);
-        const loginResponse = await authApi.login(loginUserData);
-        console.log(loginResponse);
-        reset();
-        //setLoginError('');
-        //TODO guadar token en en cookies
-        //router.push('/dashboard');
-        alert("USUARIO LOGUEADO")
-      } catch (error) {
-        if (error instanceof Error) {
-          //setLoginError(error.message);
-          console.log(error.message);
-        }
-        setStep(1);
-        resetField('password');
-      } finally {
-        //setIsLoading(false);
-      }
-
-    }
-  };
 
   const hasValue = useWatch({
     control,
@@ -67,7 +41,32 @@ export const PasswordForm = ({ mailValue, setStep }: PasswordFormTypes) => {
   const hasError = errors.password?.message;
   const errorClass = hasError && 'outline-[3px] outline-red-700';
 
+  const onSubmit = async (data: PasswordFormData) => {
+    const loginUserData = { mail: mailValue, password: data.password };
+    
+    if (loginUserData.mail !== "" && loginUserData.password !== "") {
+
+      alert(JSON.stringify(loginUserData, null, 2))
+      try {
+        const { resData, error } = await authApi.login(loginUserData);
+        console.log({ resData, error });
+        if (error === '') {
+          setLoginError('');
+          //TODO guadar token en en cookies
+          router.push("/dashboard")
+        } else throw new Error(error);
+      } catch (error) {
+        if (error instanceof Error) {
+          setLoginError(error.message);
+          console.error(error.message);
+        }
+        setStep(1);
+      }
+    }
+  }
+
   return (
+
     <form
       className="flex flex-col text-center gap-4"
       onSubmit={handleSubmit(onSubmit)}
@@ -81,13 +80,16 @@ export const PasswordForm = ({ mailValue, setStep }: PasswordFormTypes) => {
         className={`form-input ${inputClassHasValue} ${errorClass}`}
         {...register('password')}
       />
-      <button className="form-btn bg-primary" type="submit">
-        Continuar
+      <button 
+        className="form-btn bg-primary" 
+        type="submit"
+        disabled={isSubmitting}>
+        {isSubmitting ? <Spinner /> : "Continuar"}
       </button>
 
       <p className="text-red-600 text-[15px] text-center font-semibold">
         {errors.password?.message}
       </p>
     </form>
-  );
-};
+  )
+}

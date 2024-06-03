@@ -17,7 +17,6 @@ export default function Register() {
   });
   const {
     handleSubmit,
-    reset,
     setFocus,
     formState: { errors },
   } = registerMethods;
@@ -27,7 +26,7 @@ export default function Register() {
     firstName: '',
     lastName: '',
     dni: '',
-    email: '',
+    mail: '',
     password: '',
     password2: '',
     phone: '',
@@ -93,9 +92,9 @@ export default function Register() {
             />
 
             <InputForm
-              label="email"
+              label="mail"
               placeholder="Correo electrónico*"
-              error={errors?.email?.message || ''}
+              error={errors?.mail?.message || ''}
             />
           </div>
           <p className="text-my-white-bone sm:text-[13.5px] text-[12px] text-center sm:w-max w-[370px]">
@@ -129,7 +128,7 @@ export default function Register() {
                 {errors?.firstName?.message ||
                   errors?.lastName?.message ||
                   errors?.dni?.message ||
-                  errors?.email?.message ||
+                  errors?.mail?.message ||
                   errors?.password?.message ||
                   errors?.password2?.message ||
                   errors?.phone?.message}

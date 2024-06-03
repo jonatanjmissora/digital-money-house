@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { MailFormData } from '@/app/types/form.types';
@@ -9,9 +9,10 @@ import { mailSchema } from '@/app/schema/form.schema';
 type MailFormTypes = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
   setMailValue: React.Dispatch<React.SetStateAction<string>>;
+  loginError: string;
 };
 
-export const MailForm = ({ setStep, setMailValue }: MailFormTypes) => {
+export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) => {
   useEffect(() => {
     setFocus('mail');
   }, []);
@@ -21,6 +22,7 @@ export const MailForm = ({ setStep, setMailValue }: MailFormTypes) => {
     register,
     formState: { errors },
     setFocus,
+    control,
   } = useForm<MailFormData>({
     resolver: yupResolver(mailSchema),
   });
@@ -30,7 +32,8 @@ export const MailForm = ({ setStep, setMailValue }: MailFormTypes) => {
     setStep(2);
   };
 
-  const hasError = errors.mail?.message;
+  const hasValue = useWatch({control, name: "mail"})
+  const hasError = errors.mail?.message ?? "";
   const errorClass = hasError && 'outline-[3px] outline-red-700';
 
   return (
@@ -54,8 +57,8 @@ export const MailForm = ({ setStep, setMailValue }: MailFormTypes) => {
         Crear cuenta
       </Link>
 
-      <p className="text-red-600 text-[15px] text-center font-semibold">
-        {errors.mail?.message}
+      <p className="text-red-600 text-[15px] text-center font-semibold max-w-[350px]">
+        {errors.mail?.message || !hasValue && loginError}
       </p>
     </form>
   );

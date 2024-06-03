@@ -1,8 +1,10 @@
 export type LoginTypes = {
-  email: string;
+  mail: string;
   password: string;
 };
 
-export type LoginResponseType = {
-  token: string;
-};
+
+type tokenType = {token: string};
+type errorType = {error: string};
+
+export type LoginResponseType = tokenType | errorType
