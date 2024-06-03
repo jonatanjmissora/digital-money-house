@@ -1,5 +1,5 @@
 export type LoginTypes = {
-  mail: string;
+  email: string;
   password: string;
 };
 

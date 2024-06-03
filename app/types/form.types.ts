@@ -1,5 +1,5 @@
 export type MailFormData = {
-  mail: string;
+  email: string;
 };
 
 export type PasswordFormData = {
@@ -10,7 +10,7 @@ export interface RegisterFormData {
   firstName: string;
   lastName: string;
   dni: string;
-  mail: string;
+  email: string;
   password: string;
   password2: string;
   phone: string;

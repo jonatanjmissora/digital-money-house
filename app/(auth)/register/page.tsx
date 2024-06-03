@@ -9,6 +9,7 @@ import { registerSchema } from '@/app/schema/form.schema';
 import Link from 'next/link';
 import InputForm from '@/app/components/login/UI/InputForm';
 import { SubmitForm } from '@/app/components/login/UI/SubmitForm';
+import authApi from '@/app/services/auth/auth.services';
 
 export default function Register() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function Register() {
     firstName: '',
     lastName: '',
     dni: '',
-    mail: '',
+    email: '',
     password: '',
     password2: '',
     phone: '',
@@ -36,26 +37,19 @@ export default function Register() {
     setFocus('firstName');
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
+  const onSubmit: SubmitHandler<RegisterFormData> = async(data) => {
     alert(JSON.stringify(data, null, 2));
-    /*
     try {
-      setIsLoading(true);
-      const registerResponse = await getUserToken(data);
-      console.log(loginResponse);
-      reset();
-      setLoginError('');
-      //TODO guadar token en localhost o en cookies
-    } catch (e) {
-      setLoginError(e.message);
-      console.log(e.message);
-      setShowPasswordInput((prev) => !prev);
-      resetField('password');
-    } finally {
-      setIsLoading(false);
+      const { resData, error } = await authApi.register(data);
+      console.log({ resData, error });
+      if (error === '') {
+        router.push("/register/success")
+      } else throw new Error(error);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      }
     }
-    */
-    router.push('/');
   };
 
   return (
@@ -72,7 +66,7 @@ export default function Register() {
             Crear cuenta
           </h4>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 gap-6 gap-x-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 gap-6 md:gap-x-16">
             <InputForm
               label="firstName"
               placeholder="Nombre*"
@@ -92,17 +86,17 @@ export default function Register() {
             />
 
             <InputForm
-              label="mail"
+              label="email"
               placeholder="Correo electrónico*"
-              error={errors?.mail?.message || ''}
+              error={errors?.email?.message || ''}
             />
           </div>
-          <p className="text-my-white-bone sm:text-[13.5px] text-[12px] text-center sm:w-max w-[370px]">
+          <p className="text-my-white-bone sm:text-[12.5px] text-[12px] text-center sm:w-max w-[370px]">
             Usa entre 6 y 20 carácteres (debe contener al menos al menos 1
             carácter especial, una mayúscula y un número
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 gap-6 gap-x-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 gap-6 md:gap-x-16">
             <InputForm
               label="password"
               placeholder="Contraseña*"
@@ -128,7 +122,7 @@ export default function Register() {
                 {errors?.firstName?.message ||
                   errors?.lastName?.message ||
                   errors?.dni?.message ||
-                  errors?.mail?.message ||
+                  errors?.email?.message ||
                   errors?.password?.message ||
                   errors?.password2?.message ||
                   errors?.phone?.message}

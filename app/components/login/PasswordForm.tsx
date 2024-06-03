@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PasswordFormData } from '@/app/types/form.types';
 import { passwordSchema } from '@/app/schema/form.schema';
@@ -8,6 +8,12 @@ import { useRouter } from 'next/navigation';
 import { LoginResponseType, LoginTypes } from '@/app/types/login.types';
 import Spinner from './UI/Spinner';
 
+const errorInSpanish = (error: string) => {
+  if(error === "user not found") return "Usuarion no encontrado"
+  if(error === "invalid credentials") return "Contraseña no corresponde"
+  return
+}
+
 type PasswordFormTypes = {
   mailValue: string;
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -15,7 +21,7 @@ type PasswordFormTypes = {
 };
 
 export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordFormTypes) => {
-  
+
   const router = useRouter()
 
   const {
@@ -41,28 +47,41 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
   const hasError = errors.password?.message;
   const errorClass = hasError && 'outline-[3px] outline-red-700';
 
-  const onSubmit = async (data: PasswordFormData) => {
-    const loginUserData = { mail: mailValue, password: data.password };
-    
-    if (loginUserData.mail !== "" && loginUserData.password !== "") {
-
-      alert(JSON.stringify(loginUserData, null, 2))
-      try {
-        const { resData, error } = await authApi.login(loginUserData);
-        console.log({ resData, error });
-        if (error === '') {
-          setLoginError('');
-          //TODO guadar token en en cookies
-          router.push("/dashboard")
-        } else throw new Error(error);
-      } catch (error) {
-        if (error instanceof Error) {
-          setLoginError(error.message);
-          console.error(error.message);
-        }
-        setStep(1);
+  const onSubmit: SubmitHandler<PasswordFormData> = async (data) => {
+    const loginUserData = { email: mailValue, password: data.password };
+ 
+    try {
+      const res = await authApi.login(loginUserData);
+      console.log(res);
+      if(res.token){
+        alert("si")
+      } 
+    } catch (error) {
+      if (error instanceof Error) {
+        setLoginError(error.message);
+        console.error(error.message);
       }
+      setStep(1);
     }
+
+    /*
+    try {
+      const { resData, error } = await authApi.login(loginUserData);
+      console.log({ resData, error });
+      if (error === '') {
+        setLoginError('');
+        //TODO guadar token en en cookies
+        router.push("/dashboard")
+      } else throw new Error(error);
+    } catch (error) {
+      if (error instanceof Error) {
+        setLoginError(error.message);
+        console.error(error.message);
+      }
+      setStep(1);
+    }
+    */
+    
   }
 
   return (
@@ -80,8 +99,8 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
         className={`form-input ${inputClassHasValue} ${errorClass}`}
         {...register('password')}
       />
-      <button 
-        className="form-btn bg-primary" 
+      <button
+        className="form-btn bg-primary"
         type="submit"
         disabled={isSubmitting}>
         {isSubmitting ? <Spinner /> : "Continuar"}

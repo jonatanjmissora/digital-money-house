@@ -6,7 +6,7 @@ import * as yup from 'yup';
 
 export const mailSchema = yup
   .object({
-    mail: yup
+    email: yup
       .string()
       .required('Por favor, complete su e-mail')
       .matches(
@@ -35,7 +35,7 @@ export const passwordSchema = yup
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ERRORTEXT = {
-  mail: 'E-mail incorrecto. Vuelva a intentarlo',
+  email: 'E-mail incorrecto. Vuelva a intentarlo',
   dni: 'DNI mínimo de 7 dígitos numéricos',
   phone: 'Telefono mínimo de 9 dígitos numéricos',
 };
@@ -50,11 +50,11 @@ export const registerSchema = yup
     firstName: yup.string().required(requiredRes('nombre')),
     lastName: yup.string().required(requiredRes('apellido')),
     dni: yup.string().matches(/^\d{7,}$/, ERRORTEXT.dni),
-    mail: yup
+    email: yup
       .string()
       .matches(
         /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}.){1,125}[A-Z]{2,63}$/i,
-        ERRORTEXT.mail
+        ERRORTEXT.email
       ),
     password: yup
       .string()

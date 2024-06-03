@@ -14,7 +14,7 @@ type MailFormTypes = {
 
 export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) => {
   useEffect(() => {
-    setFocus('mail');
+    setFocus('email');
   }, []);
 
   const {
@@ -28,12 +28,12 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
   });
 
   const onSubmit = (data: MailFormData) => {
-    setMailValue(data.mail);
+    setMailValue(data.email);
     setStep(2);
   };
 
-  const hasValue = useWatch({control, name: "mail"})
-  const hasError = errors.mail?.message ?? "";
+  const hasValue = useWatch({control, name: "email"})
+  const hasError = errors.email?.message ?? "";
   const errorClass = hasError && 'outline-[3px] outline-red-700';
 
   return (
@@ -47,7 +47,7 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
       <input
         className={`form-input ${errorClass}`}
         placeholder="Correo electónico"
-        {...register('mail')}
+        {...register('email')}
       />
       <button className="form-btn bg-primary" type="submit">
         Continuar
@@ -58,7 +58,7 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
       </Link>
 
       <p className="text-red-600 text-[15px] text-center font-semibold max-w-[350px]">
-        {errors.mail?.message || !hasValue && loginError}
+        {errors.email?.message || !hasValue && loginError}
       </p>
     </form>
   );
