@@ -9,7 +9,7 @@ import { registerSchema } from '@/app/schema/form.schema';
 import Link from 'next/link';
 import { SubmitForm } from '@/app/components/form/SubmitForm';
 import authApi from '@/app/services/auth/auth.services';
-import InputForm from '@/app/components/form/InputForm';
+import { InputForm } from '@/app/components/form/InputForm';
 
 export default function Register() {
   const router = useRouter();

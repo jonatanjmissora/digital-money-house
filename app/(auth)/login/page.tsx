@@ -10,7 +10,7 @@ export default function LoginForm() {
   const [loginError, setLoginError] = useState<string>("")
 
   return (
-    <section className="h-screen w-screen flex flex-col justify-start items-center bg-my-dark-grey pt-20">
+    <section className="h-screen w-screen flex flex-col justify-start items-center bg-my-dark-grey">
       <Link href={'/'} className="absolute top-[1rem] right-[1rem] text-white">
         Home
       </Link>

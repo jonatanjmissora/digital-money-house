@@ -86,7 +86,7 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
   return (
 
     <form
-      className="flex flex-col text-center gap-4"
+      className="flex flex-col text-center gap-4 mt-[15%]"
       onSubmit={handleSubmit(onSubmit)}
     >
       <p className="text-white text-center my-[20px] text-[20px] font-[700]">

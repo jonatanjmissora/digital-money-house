@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import hero from './assets/hero.jpg';
 import { HeroCard } from './components/landing/HeroCard';
-import { CARDTEXT } from './utils/home.constants';
+import { CARDTEXT } from './utils/landing.constants';
 
 export default async function Home() {
   return (
