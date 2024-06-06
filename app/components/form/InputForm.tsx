@@ -6,11 +6,11 @@ type InputFormTypes = {
   error: string;
 };
 
-export default function InputForm({
+export const InputForm = ({
   label,
   placeholder,
   error,
-}: InputFormTypes) {
+}: InputFormTypes) => {
   const {
     register,
     formState: { errors },

@@ -7,9 +7,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterFormData } from '@/app/types/form.types';
 import { registerSchema } from '@/app/schema/form.schema';
 import Link from 'next/link';
-import InputForm from '@/app/components/login/UI/InputForm';
-import { SubmitForm } from '@/app/components/login/UI/SubmitForm';
+import { SubmitForm } from '@/app/components/form/SubmitForm';
 import authApi from '@/app/services/auth/auth.services';
+import InputForm from '@/app/components/form/InputForm';
 
 export default function Register() {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function Register() {
     setFocus('firstName');
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<RegisterFormData> = async(data) => {
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     alert(JSON.stringify(data, null, 2));
     try {
       const { resData, error } = await authApi.register(data);

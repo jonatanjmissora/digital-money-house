@@ -1,8 +1,8 @@
 'use client';
-import { MailForm } from '@/app/components/login/MailForm';
-import { PasswordForm } from '@/app/components/login/PasswordForm';
 import Link from 'next/link';
 import { useState } from 'react';
+import { MailForm } from './MailForm';
+import { PasswordForm } from './PasswordForm';
 
 export default function LoginForm() {
   const [mailValue, setMailValue] = useState<string>('');

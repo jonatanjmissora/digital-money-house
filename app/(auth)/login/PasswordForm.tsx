@@ -5,12 +5,11 @@ import { PasswordFormData } from '@/app/types/form.types';
 import { passwordSchema } from '@/app/schema/form.schema';
 import authApi from '@/app/services/auth/auth.services';
 import { useRouter } from 'next/navigation';
-import { LoginResponseType, LoginTypes } from '@/app/types/login.types';
-import Spinner from './UI/Spinner';
+import SVGSpinner from '@/app/components/UI/SVGSpinner';
 
 const errorInSpanish = (error: string) => {
-  if(error === "user not found") return "Usuarion no encontrado"
-  if(error === "invalid credentials") return "Contraseña no corresponde"
+  if (error === "user not found") return "Usuarion no encontrado"
+  if (error === "invalid credentials") return "Contraseña no corresponde"
   return
 }
 
@@ -49,13 +48,13 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
 
   const onSubmit: SubmitHandler<PasswordFormData> = async (data) => {
     const loginUserData = { email: mailValue, password: data.password };
- 
+
     try {
       const res = await authApi.login(loginUserData);
-      console.log(res);
-      if(res.token){
-        alert("si")
-      } 
+      if (res.token) {
+        console.log(res);
+        alert("usuario loggueado !!")
+      }
     } catch (error) {
       if (error instanceof Error) {
         setLoginError(error.message);
@@ -81,7 +80,7 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
       setStep(1);
     }
     */
-    
+
   }
 
   return (
@@ -103,7 +102,10 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
         className="form-btn bg-primary"
         type="submit"
         disabled={isSubmitting}>
-        {isSubmitting ? <Spinner /> : "Continuar"}
+        {isSubmitting ?
+          <SVGSpinner />
+          :
+          "Continuar"}
       </button>
 
       <p className="text-red-600 text-[15px] text-center font-semibold">

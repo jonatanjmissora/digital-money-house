@@ -31,6 +31,6 @@ html {
   }
 
   .form-input {
-    @apply w-[360px] h-[64px] bg-white rounded-[10px] text-[18px] font-[400] px-[20px] py-[20px] outline-none outline-offset-0 border-[3px] border-white focus:border-[3px] focus:border-primary focus:bg-white;
+    @apply w-[360px] h-[64px] rounded-[10px] text-[18px] font-[400] px-[20px] py-[20px] outline-none outline-offset-0 border-[3px] border-white focus:border-[3px] focus:border-primary;
   }
 }
