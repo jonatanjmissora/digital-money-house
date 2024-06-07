@@ -1,7 +1,7 @@
 import { RegisterFormData } from "@/app/types/form.types";
 import { LoginResponseType, LoginTypes } from "@/app/types/login.types";
 
-const API_URL = 'https://digitalmoney.digitalhouse.com/';
+const API_URL = 'https://localhost:3000/';
 
 type tokenType = {token: string}
 type errorType = {error: string}
@@ -12,10 +12,10 @@ type httpPostTypesResponse = {
   error: string;
 }
 
-export const httpPostLogin = async (endpoint: string, datos: LoginTypes)=> {
+export const httpPostLogin = async (endpoint: string, data: LoginTypes)=> {
     return await fetch(`${API_URL}${endpoint}`, {
       method: 'POST',
-      body: JSON.stringify(datos),
+      body: JSON.stringify(data),
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
     });
   }

@@ -7,12 +7,6 @@ import authApi from '@/app/services/auth/auth.services';
 import { useRouter } from 'next/navigation';
 import SVGSpinner from '@/app/components/UI/SVGSpinner';
 
-const errorInSpanish = (error: string) => {
-  if (error === "user not found") return "Usuarion no encontrado"
-  if (error === "invalid credentials") return "Contraseña no corresponde"
-  return
-}
-
 type PasswordFormTypes = {
   mailValue: string;
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -47,39 +41,21 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
   const errorClass = hasError && 'outline-[3px] outline-red-700';
 
   const onSubmit: SubmitHandler<PasswordFormData> = async (data) => {
-    const loginUserData = { email: mailValue, password: data.password };
+    const loginData = { email: mailValue, password: data.password };
 
     try {
-      const res = await authApi.login(loginUserData);
-      if (res.token) {
-        console.log(res);
+      const resp = await authApi.login(loginData)
+      const { token, error } = await resp.json();
+      console.log({token, error})
+      if (error) setLoginError(error)
+      else {
         alert("usuario loggueado !!")
       }
-    } catch (error) {
-      if (error instanceof Error) {
-        setLoginError(error.message);
-        console.error(error.message);
-      }
-      setStep(1);
-    }
 
-    /*
-    try {
-      const { resData, error } = await authApi.login(loginUserData);
-      console.log({ resData, error });
-      if (error === '') {
-        setLoginError('');
-        //TODO guadar token en en cookies
-        router.push("/dashboard")
-      } else throw new Error(error);
-    } catch (error) {
-      if (error instanceof Error) {
-        setLoginError(error.message);
-        console.error(error.message);
-      }
+    } catch (e) {
+      setLoginError("Fallo al conectar (404)");
       setStep(1);
     }
-    */
 
   }
 
