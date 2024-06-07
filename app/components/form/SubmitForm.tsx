@@ -1,11 +1,13 @@
 //import Spinner from '../UI/Spinner';
 
+import SVGSpinner from "../UI/SVGSpinner";
+
 export const SubmitForm = ({
   text,
   isLoading,
 }: {
   text: string;
-  isLoading: boolean;
+  isLoading?: boolean;
 }) => {
   return (
     <button
@@ -13,8 +15,7 @@ export const SubmitForm = ({
       type="submit"
       disabled={isLoading}
     >
-      {/*isLoading ? <Spinner /> : text*/}
-      {text}
+      {isLoading ? <SVGSpinner /> : text}
     </button>
   );
 };

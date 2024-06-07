@@ -1,12 +1,17 @@
-export type MailFormData = {
+export type MailType = {
   email: string;
 };
 
-export type PasswordFormData = {
+export type PasswordType = {
   password: string;
 };
 
-export interface RegisterFormData {
+export type LoginTypes = {
+  email: string;
+  password: string;
+}
+
+export interface RegisterTypes {
   firstName: string;
   lastName: string;
   dni: string;

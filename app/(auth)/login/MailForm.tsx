@@ -3,8 +3,10 @@ import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
-import { MailFormData } from '@/app/types/form.types';
 import { mailSchema } from '@/app/schema/form.schema';
+import { SubmitForm } from '@/app/components/form/SubmitForm';
+import { MailType } from '@/app/types/form.types';
+import { InputForm } from '@/app/components/form/InputForm';
 
 type MailFormTypes = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -23,11 +25,11 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
     formState: { errors },
     setFocus,
     control,
-  } = useForm<MailFormData>({
+  } = useForm<MailType>({
     resolver: yupResolver(mailSchema),
   });
 
-  const onSubmit = (data: MailFormData) => {
+  const onSubmit = (data: MailType) => {
     setMailValue(data.email);
     setStep(2);
   };
@@ -44,14 +46,14 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
       <p className="text-white text-center my-[20px] text-[20px] font-[700]">
         ¡Hola! Ingresá tu e-mail
       </p>
+
       <input
         className={`form-input ${errorClass}`}
         placeholder="Correo electónico"
         {...register('email')}
       />
-      <button className="form-btn bg-primary" type="submit">
-        Continuar
-      </button>
+
+      <SubmitForm text={'Continuar'} />
 
       <Link href={'/register'} className="form-btn bg-gray-400">
         Crear cuenta

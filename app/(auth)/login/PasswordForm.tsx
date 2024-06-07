@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PasswordFormData } from '@/app/types/form.types';
 import { passwordSchema } from '@/app/schema/form.schema';
 import authApi from '@/app/services/auth/auth.services';
 import { useRouter } from 'next/navigation';
 import SVGSpinner from '@/app/components/UI/SVGSpinner';
+import { PasswordType } from '@/app/types/form.types';
+import { SubmitForm } from '@/app/components/form/SubmitForm';
 
 type PasswordFormTypes = {
   mailValue: string;
@@ -23,7 +24,7 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
     formState: { errors, isSubmitting },
     setFocus,
     control,
-  } = useForm<PasswordFormData>({
+  } = useForm<PasswordType>({
     resolver: yupResolver(passwordSchema),
   });
 
@@ -40,23 +41,18 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
   const hasError = errors.password?.message;
   const errorClass = hasError && 'outline-[3px] outline-red-700';
 
-  const onSubmit: SubmitHandler<PasswordFormData> = async (data) => {
+  const onSubmit: SubmitHandler<PasswordType> = async (data) => {
+    setLoginError("")
     const loginData = { email: mailValue, password: data.password };
 
-    try {
-      const resp = await authApi.login(loginData)
-      const { token, error } = await resp.json();
-      console.log({token, error})
-      if (error) setLoginError(error)
-      else {
-        alert("usuario loggueado !!")
-      }
-
-    } catch (e) {
-      setLoginError("Fallo al conectar (404)");
-      setStep(1);
+    const { status, response, error } = await authApi.login(loginData)
+    if (error) {
+      setLoginError(error);
     }
-
+    else {
+      router.replace("/dashboard")
+    }
+    setStep(1);
   }
 
   return (
@@ -73,16 +69,9 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
         placeholder="Contraseña"
         className={`form-input ${inputClassHasValue} ${errorClass}`}
         {...register('password')}
+        autoComplete='on'
       />
-      <button
-        className="form-btn bg-primary"
-        type="submit"
-        disabled={isSubmitting}>
-        {isSubmitting ?
-          <SVGSpinner />
-          :
-          "Continuar"}
-      </button>
+      <SubmitForm text={'Continuar'} isLoading={isSubmitting} />
 
       <p className="text-red-600 text-[15px] text-center font-semibold">
         {errors.password?.message}

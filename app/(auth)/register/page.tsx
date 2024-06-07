@@ -4,52 +4,40 @@ import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { RegisterFormData } from '@/app/types/form.types';
 import { registerSchema } from '@/app/schema/form.schema';
 import Link from 'next/link';
 import { SubmitForm } from '@/app/components/form/SubmitForm';
 import authApi from '@/app/services/auth/auth.services';
 import { InputForm } from '@/app/components/form/InputForm';
+import { RegisterTypes } from '@/app/types/form.types';
 
 export default function Register() {
   const router = useRouter();
-  const registerMethods = useForm<RegisterFormData>({
+  const registerMethods = useForm<RegisterTypes>({
     resolver: yupResolver(registerSchema),
   });
   const {
     handleSubmit,
     setFocus,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = registerMethods;
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [userRegister, setUserRegister] = useState<RegisterFormData>({
-    firstName: '',
-    lastName: '',
-    dni: '',
-    email: '',
-    password: '',
-    password2: '',
-    phone: '',
-  });
+  const [registerError, setRegisterError] = useState<string>("");
 
   useEffect(() => {
     setFocus('firstName');
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
-    alert(JSON.stringify(data, null, 2));
-    try {
-      const { resData, error } = await authApi.register(data);
-      console.log({ resData, error });
-      if (error === '') {
-        router.push("/register/success")
-      } else throw new Error(error);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
+  const onSubmit: SubmitHandler<RegisterTypes> = async (data) => {
+    setRegisterError("")
+    const { status, response, error } = await authApi.register(data)
+    if (error) {
+      setRegisterError(error)
     }
+    else {
+      router.replace(`/login`)
+    }
+
   };
 
   return (
@@ -116,7 +104,7 @@ export default function Register() {
             />
 
             <div>
-              <SubmitForm text="Crear cuenta" isLoading={isLoading} />
+              <SubmitForm text="Crear cuenta" isLoading={isSubmitting} />
 
               <p className="text-my-red text-[15px] text-center mt-4">
                 {errors?.firstName?.message ||
@@ -125,7 +113,8 @@ export default function Register() {
                   errors?.email?.message ||
                   errors?.password?.message ||
                   errors?.password2?.message ||
-                  errors?.phone?.message}
+                  errors?.phone?.message ||
+                  registerError}
               </p>
             </div>
           </div>

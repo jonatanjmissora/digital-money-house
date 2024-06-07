@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 type InputFormTypes = {
   label: string;
   placeholder: string;
-  error: string;
+  error?: string;
 };
 
 export const InputForm = ({
