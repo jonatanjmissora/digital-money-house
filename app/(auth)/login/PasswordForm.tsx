@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { passwordSchema } from '@/app/schema/form.schema';
 import authApi from '@/app/services/auth/auth.services';
 import { useRouter } from 'next/navigation';
-import SVGSpinner from '@/app/components/UI/SVGSpinner';
 import { PasswordType } from '@/app/types/form.types';
 import { SubmitForm } from '@/app/components/form/SubmitForm';
 
@@ -58,7 +57,7 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
   return (
 
     <form
-      className="flex flex-col text-center gap-4 mt-[15%]"
+      className="flex flex-col text-center gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
       <p className="text-white text-center my-[20px] text-[20px] font-[700]">

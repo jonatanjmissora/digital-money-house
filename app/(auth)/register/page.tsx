@@ -5,11 +5,10 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '@/app/schema/form.schema';
-import Link from 'next/link';
-import { SubmitForm } from '@/app/components/form/SubmitForm';
 import authApi from '@/app/services/auth/auth.services';
 import { InputForm } from '@/app/components/form/InputForm';
 import { RegisterTypes } from '@/app/types/form.types';
+import { SubmitForm } from '@/app/components/form/SubmitForm';
 
 export default function Register() {
   const router = useRouter();
@@ -41,10 +40,7 @@ export default function Register() {
   };
 
   return (
-    <section className="w-full h-screen bg-my-dark-grey flex flex-col justify-center items-center">
-      <Link href={'/'} className="absolute top-[1rem] right-[1rem] text-white">
-        Home
-      </Link>
+    <section className="w-full h-screen bg-my-dark-grey flex flex-col justify-start items-center pt-[7rem]">
       <FormProvider {...registerMethods}>
         <form
           onSubmit={handleSubmit(onSubmit)}

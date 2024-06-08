@@ -40,7 +40,7 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
 
   return (
     <form
-      className="flex flex-col text-center gap-4 mt-[15%]"
+      className="flex flex-col text-center gap-4"
       onSubmit={handleSubmit(onSubmit)}
     >
       <p className="text-white text-center my-[20px] text-[20px] font-[700]">
@@ -53,7 +53,7 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
         {...register('email')}
       />
 
-      <SubmitForm text={'Continuar'} />
+      <SubmitForm text={'Continuar'}/>
 
       <Link href={'/register'} className="form-btn bg-gray-400">
         Crear cuenta

@@ -26,3 +26,9 @@ export const httpPostRegister = async (endpoint: string, data: RegisterTypes) =>
     headers: { 'Content-type': 'application/json' },
   });
 }
+
+export const httpGet = async (endpoint: string) => {
+  return await fetch(`${LOCALHOST}${endpoint}/40`, {
+    
+  })
+}

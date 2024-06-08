@@ -1,5 +1,3 @@
-//import Spinner from '../UI/Spinner';
-
 import SVGSpinner from "../UI/SVGSpinner";
 
 export const SubmitForm = ({

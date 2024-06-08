@@ -31,6 +31,9 @@ export async function POST(request: NextRequest) {
     resObj.response = await data.json()
     if (resObj.response?.token) {
       cookies().set('swagger_token', resObj.response?.token);
+      cookies().set('swagger_account_id', JSON.stringify(23));
+      cookies().set('swagger_email', "jonatanjmissora@gmail.com");
+      cookies().set('swagger_user_id', JSON.stringify(40));
     }
 
     console.log("ROUTE status: ", data.status)

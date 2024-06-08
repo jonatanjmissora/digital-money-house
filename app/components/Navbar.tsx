@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import SVGLogo from './UI/SVGLogo';
+import UserNavbar from './UserNavbar';
 
-export default function Navbar() {
+export default async function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -45,17 +46,7 @@ export default function Navbar() {
           Iniciar sesión
         </Link>
       )}
-      {isDashboardPath && (
-        <div className="flex gap-3 justify-center items-center">
-          <button
-            onClick={handleLogout}
-            className="nav-btn bg-primary border-primary rounded-xl px-2"
-          >
-            JM
-          </button>
-          <span className="text-white">Hola, Jonatan Missora</span>
-        </div>
-      )}
+      {isDashboardPath && <UserNavbar />}
     </header>
   );
 }
