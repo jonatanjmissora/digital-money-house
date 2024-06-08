@@ -6,7 +6,7 @@ import { CARDTEXT } from './utils/landing.constants';
 export default async function Home() {
   return (
     <main className="h-screen">
-      <div className="w-full h-[540px] mt-[39px]">
+      <div className="w-full h-[540px] mt-[39px] relative">
         <Image
           className="object-cover"
           src={hero}
