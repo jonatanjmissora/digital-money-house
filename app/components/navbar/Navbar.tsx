@@ -1,5 +1,5 @@
-import UserNav from './navbar/UserNav';
-import NavbarContainer from './navbar/NavbarContainer';
+import UserNav from './UserNav';
+import NavbarContainer from './NavbarContainer';
 
 export default function Navbar() {
 

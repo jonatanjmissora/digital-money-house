@@ -15,10 +15,10 @@ export default function NavbarContainer({ slot }: { slot: React.ReactNode }) {
     isHomePath || isDashboardPath ? 'text-primary' : 'text-black';
   return (
     <header
-      className={`w-full h-nav fixed left-0 z-10 flex justify-between items-center px-[20px] ${headerBg}`}>
+      className={`w-full flex justify-between items-center px-8 py-2 ${headerBg}`}>
 
       {<Link href="/">
-        <SVGLogo className={`w-[87px] h-[33px] ${textLogo}`} />
+        <SVGLogo className={`h-8 ${textLogo}`} />
       </Link>}
 
       {isHomePath && (<nav className="flex gap-[20px]">

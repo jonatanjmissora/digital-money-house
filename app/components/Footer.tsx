@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="relative h-[70px] px-[20px] flex items-center bg-my-light-grey text-primary">
+    <footer className="flex items-center bg-my-light-grey text-primary text-xs px-8 lg:py-4 py-6">
       © {new Date().getFullYear()} Digital Money House
     </footer>
   );
