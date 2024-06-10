@@ -2,7 +2,7 @@ export const CARDTEXT = {
   card1: {
     title: 'Transferí dinero',
     content:
-      'Desde Digital Money House vas a poder transferir dinero a otras cuentas, si como también recibir transferencias y nuclear tu capital en nuestra  billetera virtual',
+      'Desde Digital Money House vas a poder transferir dinero a otras cuentas, asi como también recibir transferencias y nuclear tu capital en nuestra  billetera virtual',
   },
   card2: {
     title: 'Pago de servicios',

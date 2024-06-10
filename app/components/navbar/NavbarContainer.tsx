@@ -15,7 +15,7 @@ export default function NavbarContainer({ slot }: { slot: React.ReactNode }) {
     isHomePath || isDashboardPath ? 'text-primary' : 'text-black';
   return (
     <header
-      className={`w-full flex justify-between items-center px-8 py-2 ${headerBg}`}>
+      className={`w-full flex justify-between items-center px-5 py-3 ${headerBg}`}>
 
       {<Link href="/">
         <SVGLogo className={`h-8 ${textLogo}`} />
