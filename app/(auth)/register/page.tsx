@@ -40,7 +40,7 @@ export default function Register() {
   };
 
   return (
-    <section className="w-full h-screen bg-my-dark-grey flex flex-col justify-start items-center pt-[7rem]">
+    <section className="w-full h-screen bg-my-dark-grey flex flex-col justify-start items-center">
       <FormProvider {...registerMethods}>
         <form
           onSubmit={handleSubmit(onSubmit)}

@@ -25,7 +25,7 @@ export default async function Dashboard() {
   const userData = await getData()
 
   return (
-    <section className="flex-1 w-screen flex justify-start items-center pt-[64px]">
+    <section className="flex-1 w-screen flex justify-start items-center ">
       <Menu />
       <Content />
     </section>
