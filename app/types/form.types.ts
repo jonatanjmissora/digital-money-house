@@ -12,8 +12,8 @@ export type LoginTypes = {
 }
 
 export interface RegisterTypes {
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   dni: string;
   email: string;
   password: string;

@@ -53,13 +53,13 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
         {...register('email')}
       />
 
-      <SubmitForm text={'Continuar'}/>
+      <SubmitForm text={'Continuar'} />
 
       <Link href={'/register'} className="form-btn bg-gray-400">
         Crear cuenta
       </Link>
 
-      <p id="login-error" className="text-red-600 text-[15px] text-center font-semibold max-w-[350px]">
+      <p id="login-mail-error" className="text-red-600 text-[15px] text-center font-semibold max-w-[350px]">
         {errors.email?.message || !hasValue && loginError}
       </p>
     </form>

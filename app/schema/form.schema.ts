@@ -47,8 +47,8 @@ const requiredRes = (label: string) => {
 export const registerSchema = yup
   .object()
   .shape({
-    firstName: yup.string().required(requiredRes('nombre')),
-    lastName: yup.string().required(requiredRes('apellido')),
+    firstname: yup.string().required(requiredRes('nombre')),
+    lastname: yup.string().required(requiredRes('apellido')),
     dni: yup.string().matches(/^\d{7,}$/, ERRORTEXT.dni),
     email: yup
       .string()

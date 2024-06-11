@@ -76,7 +76,7 @@ export default async function Home() {
         <p className="text-white font-medium text-[1.65rem] sm:text-5xl xl:leading-none leading-tight">
           De ahora en adelante, hacés más con tu dinero
         </p>
-        <div className='h-1 w-6 bg-primary mt-4'></div>
+        <div className='h-1 w-6 bg-primary mt-4 block sm:hidden xl:hidden'></div>
         <p className="text-primary xl:text-[4.5vh] font-light text-2xl xl:leading-none leading-tight pt-5">
           Tu nueva <span className="font-[500] xl:text-[4.5vh] text-2xl">billetera virtual</span>
         </p>

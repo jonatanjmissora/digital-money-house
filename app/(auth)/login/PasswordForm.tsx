@@ -72,7 +72,7 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
       />
       <SubmitForm text={'Continuar'} isLoading={isSubmitting} />
 
-      <p className="text-red-600 text-[15px] text-center font-semibold">
+      <p id="login-password-error" className="text-red-600 text-[15px] text-center font-semibold">
         {errors.password?.message}
       </p>
     </form>

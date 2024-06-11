@@ -24,7 +24,7 @@ export default function Register() {
   const [registerError, setRegisterError] = useState<string>("");
 
   useEffect(() => {
-    setFocus('firstName');
+    setFocus('firstname');
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<RegisterTypes> = async (data) => {
@@ -40,7 +40,7 @@ export default function Register() {
   };
 
   return (
-    <section className="w-full h-screen bg-my-dark-grey flex flex-col justify-start items-center">
+    <section className="w-full h-screen bg-my-dark-grey flex flex-col justify-center items-center">
       <FormProvider {...registerMethods}>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -52,15 +52,15 @@ export default function Register() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 gap-6 md:gap-x-16">
             <InputForm
-              label="firstName"
+              label="firstname"
               placeholder="Nombre*"
-              error={errors?.firstName?.message || ''}
+              error={errors?.firstname?.message || ''}
             />
 
             <InputForm
-              label="lastName"
+              label="lastname"
               placeholder="Apellido*"
-              error={errors?.lastName?.message || ''}
+              error={errors?.lastname?.message || ''}
             />
 
             <InputForm
@@ -102,9 +102,9 @@ export default function Register() {
             <div>
               <SubmitForm text="Crear cuenta" isLoading={isSubmitting} />
 
-              <p className="text-my-red text-[15px] text-center mt-4">
-                {errors?.firstName?.message ||
-                  errors?.lastName?.message ||
+              <p id="register-error" className="text-my-red text-[15px] text-center mt-4">
+                {errors?.firstname?.message ||
+                  errors?.lastname?.message ||
                   errors?.dni?.message ||
                   errors?.email?.message ||
                   errors?.password?.message ||
