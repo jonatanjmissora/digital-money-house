@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { jwtDecode } from "jwt-decode";
 
 const SWAGGER = "https://digitalmoney.digitalhouse.com/"
 
@@ -30,19 +31,17 @@ export async function POST(request: NextRequest) {
     }
     resObj.response = await data.json()
     if (resObj.response?.token) {
-      cookies().set('swagger_token', resObj.response?.token);
-      cookies().set('swagger_account_id', JSON.stringify(23));
-      cookies().set('swagger_email', "jonatanjmissora@gmail.com");
-      cookies().set('swagger_user_id', JSON.stringify(40));
+      const JWTdecoded = jwtDecode(resObj.response?.token);
+      console.log({ JWTdecoded });
+      const newExp = Date.now() + JWTdecoded.exp;
+      cookies().set('swagger_token', resObj.response?.token, { expires: newExp, httpOnly: true })
+      console.log("guarde token en cookies")
     }
-
-    console.log("ROUTE status: ", data.status)
     resObj.status = data.status;
   } catch (e) {
     if (e instanceof Error)
       resObj.error = "Fallo al conectar"
   }
-  console.log("ROUTE response: ", resObj.response)
-  console.log("ROUTE error: ", resObj.error)
+  console.log(resObj)
   return NextResponse.json(resObj);
 }
