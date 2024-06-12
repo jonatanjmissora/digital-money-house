@@ -17,15 +17,15 @@ export default function NavbarContainer({ slot }: { slot: React.ReactNode }) {
     <header
       className={`w-full flex justify-between items-center px-5 py-3 ${headerBg}`}>
 
-      {<Link href="/">
+      {<Link id="logo" href="/">
         <SVGLogo className={`h-8 ${textLogo}`} />
       </Link>}
 
       {isHomePath && (<nav className="flex gap-[20px]">
-        <Link href="/login" className="nav-btn text-primary border-primary">
+        <Link href="/login" className="login nav-btn text-primary border-primary">
           Ingresar
         </Link>
-        <Link href="/register" className="nav-btn bg-primary border-primary">
+        <Link href="/register" className="register nav-btn bg-primary border-primary">
           Crear cuenta
         </Link>
       </nav>)}
@@ -33,7 +33,7 @@ export default function NavbarContainer({ slot }: { slot: React.ReactNode }) {
       {isRegisterPath && (
         <Link
           href="/login"
-          className="nav-btn border-my-light-grey bg-my-light-grey text-white"
+          className="login nav-btn border-my-light-grey bg-my-light-grey text-white"
         >
           Iniciar sesión
         </Link>

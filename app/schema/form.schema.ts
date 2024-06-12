@@ -37,7 +37,7 @@ export const passwordSchema = yup
 const ERRORTEXT = {
   email: 'E-mail incorrecto. Vuelva a intentarlo',
   dni: 'DNI mínimo de 7 dígitos numéricos',
-  phone: 'Telefono mínimo de 9 dígitos numéricos',
+  phone: 'Telefono mínimo de 9 dígitos',
 };
 
 const requiredRes = (label: string) => {
@@ -66,9 +66,7 @@ export const registerSchema = yup
       .matches(/[^\w]/, 'Contraseña con al menos un caracter especial'),
     password2: yup
       .string()
-      .min(6, 'Contraseña con un mínimo de 6 caracteres')
-      .max(20, 'Contraseña con un máximo de 20 caracteres')
-      .oneOf([yup.ref('password')], 'Passwords do not match'),
+      .oneOf([yup.ref('password')], 'Las contraseñas no coinciden'),
     phone: yup.string().matches(/^\d{9,}$/, ERRORTEXT.phone),
   })
   .required();

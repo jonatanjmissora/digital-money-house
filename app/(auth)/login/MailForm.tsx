@@ -55,7 +55,7 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
 
       <SubmitForm text={'Continuar'} />
 
-      <Link href={'/register'} className="form-btn bg-gray-400">
+      <Link href={'/register'} className="register form-btn bg-gray-400">
         Crear cuenta
       </Link>
 

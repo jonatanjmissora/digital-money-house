@@ -74,8 +74,8 @@ describe("LOGIN INPUTs VALIDATIONs", async () => {
         await driver.findElement(By.name("password")).clear()
         await driver.findElement(By.name("password")).sendKeys("123456")
         await driver.findElement(By.css(`[type="submit"]`)).click()
-        let loginErrorText = await driver.findElement(By.css(`[type="submit"]`)).getText()
-        assert.strictEqual(loginErrorText, "");
+        let submitText = await driver.findElement(By.css(`[type="submit"]`)).getText()
+        assert.strictEqual(submitText, "");
     })
 
 })
