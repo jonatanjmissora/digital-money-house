@@ -1,6 +1,7 @@
 import userApi from "@/app/services/user/user.services";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const capitalize = (str: string) => {
   if (str) return str.charAt(0).toUpperCase() + str.slice(1)

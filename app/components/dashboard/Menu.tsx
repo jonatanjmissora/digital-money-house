@@ -1,15 +1,35 @@
+"use client"
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const LINKS = [
+  { text: "Inicio", href: "/dashboard" },
+  { text: "Actividad", href: "/dashboard/transactions" },
+  { text: "Tu perfil", href: "/dashboard/profile" },
+  { text: "Carar dinero", href: "/dashboard/load" },
+  { text: "Pagar Servicios", href: "/dashboard/payments" },
+  { text: "Tarjetas", href: "/dashboard/cards" },
+]
 
 export default function Menu() {
+
+  const pathname = usePathname()
+  console.log(pathname)
+
   return (
-    <aside className="w-[20%] h-full bg-primary">
+    <aside className="w-[15%] h-full bg-primary">
       <nav className="flex flex-col gap-3 p-8">
-        <Link href={"/dashboard"}>Inicio</Link>
-        <Link href={"/dashboard/transactions"}>Actividad</Link>
-        <Link href={"/dashboard/user-info"}>Tu perfil</Link>
-        <Link href={"/dashboard/load"}>Carar dinero</Link>
-        <Link href={"/dashboard/payments"}>Pagar Servicios</Link>
-        <Link href={"/dashboard/cards"}>Tarjetas</Link>
+        {LINKS.map(link =>
+          <Link
+            className={`${pathname === link.href && "font-bold"}`}
+            key={link.text}
+            href={link.href}
+          >
+            {link.text}
+          </Link>
+
+        )}
         <button className="w-max opacity-50">Cerrar sesión</button>
       </nav>
     </aside>

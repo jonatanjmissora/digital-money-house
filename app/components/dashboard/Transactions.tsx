@@ -50,7 +50,7 @@ const Transaction = ({ transaction }) => {
   const { detail, sign, value, day } = transaction
 
   return (
-    <div className='tracking-normal flex gap-4 items-center border-t border-b border-black py-2 opacity-75 text-sm'>
+    <div className='tracking-normal flex gap-4 items-center border-t border-black py-2 opacity-75 text-sm'>
       <span className='bg-primary rounded-full w-8 aspect-square'></span>
       <span>{detail}</span>
       <div className='ml-auto flex flex-col'>

@@ -6,9 +6,10 @@ import SVGLogo from '../UI/SVGLogo'
 
 export default function NavbarContainer({ slot }: { slot: React.ReactNode }) {
   const pathname = usePathname();
-  const isDashboardPath = pathname === '/dashboard';
-  const isRegisterPath = pathname === '/register';
-  const isHomePath = pathname === '/';
+  const rootPathname = pathname.split("/")[1];
+  const isDashboardPath = rootPathname === 'dashboard';
+  const isRegisterPath = rootPathname === 'register';
+  const isHomePath = rootPathname === '';
   const headerBg =
     isHomePath || isDashboardPath ? 'bg-my-dark-grey' : 'bg-primary';
   const textLogo =
