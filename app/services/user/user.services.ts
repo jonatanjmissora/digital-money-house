@@ -8,7 +8,7 @@ class UserApi {
     if (!token) return
 
     const { username: user_id, email, exp } = jwtDecode(token);
-    console.log("**** RESPUESTA de token", { user_id, email, exp })
+    console.log("**** USER SERVICE", { user_id, email, exp })
     const res = await fetch(`https://digitalmoney.digitalhouse.com/api/users/${user_id}`, {
       method: 'GET',
       headers: {

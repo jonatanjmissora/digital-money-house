@@ -1,5 +1,5 @@
+import Menu from '@/app/components/dashboard/Menu';
 import React from 'react'
-import Menu from '../components/dashboard/Menu';
 
 export default function DashboardLayout({ children,
 }: {
