@@ -1,6 +1,8 @@
-import SVGCheckbox from '@/app/components/UI/SVGCheckbox';
-import SVGCheckboxFill from '@/app/components/UI/SVGCheckboxFill';
-import React from 'react'
+"use client"
+import SVGPlus from '@/app/components/UI/SVGPlus';
+import { CardRow } from '@/app/components/dashboard/load/CardRow';
+import Link from 'next/link';
+import React, { useState } from 'react'
 
 type CardType = {
   id: number;
@@ -26,34 +28,28 @@ const CARDS: CardType[] = [{
 ];
 
 export default function LoadCards() {
+  const [actualCardId, setActualCardId] = useState<number>(1)
+  
   return (
     <article className="flex-1 h-full overflow-hidden flex flex-col justify-between 2xl:justify-start 2xl:gap-4 bg-my-light-light-grey py-6 px-[10%]">
-      <div className='card bg-my-black p-12'>
-        <h2 className='text-2xl font-bold text-primary pb-6'>Seleccionar tarjetas</h2>
+      <div className='card bg-my-black p-12 flex flex-col gap-5'>
+        <h2 className='text-2xl font-bold text-primary'>Seleccionar tarjetas</h2>
         <div className='card bg-white p-8'>
 
           <h3 className='font-semibold tracking-wide py-1'>Tus tarjetas</h3>
           {
-            CARDS.map((card) => <Card key={card.id} card={card} />)
+            CARDS.map((card) => <CardRow key={card.id} card={card} actualCardId={actualCardId} changeCardId={setActualCardId} />)
           }
+        </div>
+        <div className='flex justify-between'>
+          <Link href={"/dashboard/cards/new"} className='flex justify-center items-center gap-4'>
+            <SVGPlus className='text-primary'/>
+            <span className='text-primary font-semibold text-xl'>Nueva tarjeta</span>
+          </Link>
+          <button className='bg-primary form-btn'>Continuar</button>
         </div>
       </div>
     </article>
   )
 }
 
-const Card = ({ card }: { card: CardType }) => {
-
-  const { id, card_number } = card
-
-  return (
-    <div className='tracking-normal flex gap-4 justify-between items-center border-b border-black py-2 opacity-75 text-sm'>
-      <div className='flex justify-between items-center gap-5'>
-        <span className='bg-primary rounded-full w-8 aspect-square'></span>
-        <span>Terminada en {card_number}</span>
-      </div>
-      <SVGCheckbox />
-      <SVGCheckboxFill className='text-primary' />
-    </div>
-  )
-}

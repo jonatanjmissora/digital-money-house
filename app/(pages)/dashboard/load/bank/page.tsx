@@ -1,4 +1,4 @@
-import UserAccount from "@/app/components/dashboard/profile/UserAccount";
+import UserAccount from "@/app/components/dashboard/Profile/UserAccount";
 
 export default async function LoadBank() {
 

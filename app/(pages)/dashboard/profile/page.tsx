@@ -1,6 +1,6 @@
-import UserAccount from '@/app/components/dashboard/profile/UserAccount'
-import UserCards from '@/app/components/dashboard/profile/UserCards'
-import UserData from '@/app/components/dashboard/profile/UserData'
+import UserAccount from '@/app/components/dashboard/Profile/UserAccount'
+import UserCards from '@/app/components/dashboard/Profile/UserCards'
+import UserData from '@/app/components/dashboard/Profile/UserData'
 import React from 'react'
 
 export default function Profile() {

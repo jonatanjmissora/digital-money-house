@@ -1,5 +1,4 @@
-import UserAccount from '@/app/components/dashboard/profile/UserAccount'
-import React from 'react'
+import UserAccount from "@/app/components/dashboard/Profile/UserAccount";
 
 export default function Account() {
   return (
