@@ -29,7 +29,7 @@ const CARDS: CardType[] = [{
 
 export default function LoadCards() {
   const [actualCardId, setActualCardId] = useState<number>(1)
-  
+
   return (
     <article className="flex-1 h-full overflow-hidden flex flex-col justify-between 2xl:justify-start 2xl:gap-4 bg-my-light-light-grey py-6 px-[10%]">
       <div className='card bg-my-black p-12 flex flex-col gap-5'>
@@ -43,10 +43,10 @@ export default function LoadCards() {
         </div>
         <div className='flex justify-between'>
           <Link href={"/dashboard/cards/new"} className='flex justify-center items-center gap-4'>
-            <SVGPlus className='text-primary'/>
+            <SVGPlus className='text-primary' />
             <span className='text-primary font-semibold text-xl'>Nueva tarjeta</span>
           </Link>
-          <button className='bg-primary form-btn'>Continuar</button>
+          <Link href={"/dashboard/load/cards/amount"} className='bg-primary form-btn'>Continuar</Link>
         </div>
       </div>
     </article>

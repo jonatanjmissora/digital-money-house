@@ -34,7 +34,7 @@ export default function MyCards() {
   )
 }
 
-const Card = ({ card }) => {
+const Card = ({ card }: { card: CardType }) => {
 
   const { id, card_number } = card
 
