@@ -13,7 +13,6 @@ export const InputForm = ({
 }: InputFormTypes) => {
   const {
     register,
-    formState: { errors },
   } = useFormContext();
 
   const [hasPassword, hasPassword2] = useWatch({

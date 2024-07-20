@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { passwordSchema } from '@/app/schema/form.schema';
 import authApi from '@/app/services/auth/auth.services';
 import { useRouter } from 'next/navigation';
 import { PasswordType } from '@/app/types/form.types';
 import { SubmitForm } from '@/app/components/form/SubmitForm';
+import { InputForm } from '@/app/components/form/InputForm';
 
 type PasswordFormTypes = {
   mailValue: string;
@@ -17,15 +18,16 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
 
   const router = useRouter()
 
+  const loginPasswordMethods = useForm<PasswordType>({
+    resolver: yupResolver(passwordSchema),
+  })
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
     setFocus,
     control,
-  } = useForm<PasswordType>({
-    resolver: yupResolver(passwordSchema),
-  });
+  } = loginPasswordMethods
 
   useEffect(() => {
     setFocus('password');
@@ -55,26 +57,27 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
   }
 
   return (
+    <FormProvider {...loginPasswordMethods}>
+      <form
+        className="flex flex-col text-center gap-4 relative"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <p className="text-white text-center my-[20px] text-[20px] font-[700]">
+          Ingresá tu contraseña
+        </p>
 
-    <form
-      className="flex flex-col text-center gap-4 relative"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <p className="text-white text-center my-[20px] text-[20px] font-[700]">
-        Ingresá tu contraseña
-      </p>
-      <input
-        type="password"
-        placeholder="Contraseña"
-        className={`form-input ${inputClassHasValue} ${errorClass}`}
-        {...register('password')}
-        autoComplete='on'
-      />
-      <SubmitForm text={'Continuar'} isLoading={isSubmitting} />
+        <InputForm
+          label="password"
+          placeholder="Contraseña"
+          error={errors?.password?.message || ''}
+        />
 
-      <p id="login-password-error" className="text-red-600 text-[15px] text-center font-semibold absolute -bottom-[2rem] w-full">
-        {errors.password?.message}
-      </p>
-    </form>
+        <SubmitForm text={'Continuar'} isLoading={isSubmitting} />
+
+        <p id="login-password-error" className="text-red-600 text-[15px] text-center font-semibold absolute -bottom-[2rem] w-full">
+          {errors.password?.message}
+        </p>
+      </form>
+    </FormProvider>
   )
 }
