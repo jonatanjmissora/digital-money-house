@@ -57,7 +57,7 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
   return (
 
     <form
-      className="flex flex-col text-center gap-4"
+      className="flex flex-col text-center gap-4 relative"
       onSubmit={handleSubmit(onSubmit)}
     >
       <p className="text-white text-center my-[20px] text-[20px] font-[700]">
@@ -72,7 +72,7 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
       />
       <SubmitForm text={'Continuar'} isLoading={isSubmitting} />
 
-      <p id="login-password-error" className="text-red-600 text-[15px] text-center font-semibold">
+      <p id="login-password-error" className="text-red-600 text-[15px] text-center font-semibold absolute -bottom-[2rem] w-full">
         {errors.password?.message}
       </p>
     </form>

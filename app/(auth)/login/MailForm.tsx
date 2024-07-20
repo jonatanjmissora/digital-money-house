@@ -40,7 +40,7 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
 
   return (
     <form
-      className="flex flex-col text-center gap-4"
+      className="flex flex-col text-center gap-4 relative"
       onSubmit={handleSubmit(onSubmit)}
     >
       <p className="text-white text-center my-[20px] text-[20px] font-[700]">
@@ -59,7 +59,7 @@ export const MailForm = ({ setStep, setMailValue, loginError }: MailFormTypes) =
         Crear cuenta
       </Link>
 
-      <p id="login-mail-error" className="text-red-600 text-[15px] text-center font-semibold max-w-[350px]">
+      <p id="login-mail-error" className="text-red-600 text-[15px] text-center font-semibold absolute -bottom-[2rem] w-full">
         {errors.email?.message || !hasValue && loginError}
       </p>
     </form>
