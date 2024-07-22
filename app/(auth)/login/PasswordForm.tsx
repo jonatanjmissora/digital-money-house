@@ -38,10 +38,6 @@ export const PasswordForm = ({ mailValue, setStep, setLoginError }: PasswordForm
     name: 'password',
   });
 
-  const inputClassHasValue = hasValue && 'text-4xl';
-  const hasError = errors.password?.message;
-  const errorClass = hasError && 'outline-[3px] outline-red-700';
-
   const onSubmit: SubmitHandler<PasswordType> = async (data) => {
     setLoginError("")
     const loginData = { email: mailValue, password: data.password };
